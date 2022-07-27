@@ -9,10 +9,10 @@ import javax.persistence.Persistence;
 import java.util.List;
 
 public class PessoaModel {
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("admin-jpa");
+    EntityManager em;
     public void create(Pessoa pessoa) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("admin-jpa");
-        EntityManager em = emf.createEntityManager();
-
+        em = emf.createEntityManager();
         try {
             System.out.println("Criando uma pessoa");
             em.getTransaction().begin();
@@ -29,9 +29,7 @@ public class PessoaModel {
     }
 
     public void update(Pessoa pessoa) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("admin-jpa");
-        EntityManager em = emf.createEntityManager();
-
+        em = emf.createEntityManager();
         try {
             System.out.println("Atualizando uma pessoa");
             Pessoa p = em.find(Pessoa.class, pessoa.getId());
@@ -49,9 +47,7 @@ public class PessoaModel {
     }
 
     public void delete(Pessoa pessoa) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("admin-jpa");
-        EntityManager em = emf.createEntityManager();
-
+        em = emf.createEntityManager();
         try {
             System.out.println("Deletando uma pessoa");
             Pessoa p = em.find(Pessoa.class, pessoa.getId());
@@ -69,9 +65,7 @@ public class PessoaModel {
     }
 
     public void findById(Pessoa pessoa) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("admin-jpa");
-        EntityManager em = emf.createEntityManager();
-
+        em = emf.createEntityManager();
         try {
             System.out.println("Buscando uma pessoa por id");
             Pessoa p1 = em.find(Pessoa.class, pessoa.getId());
@@ -86,9 +80,7 @@ public class PessoaModel {
     }
 
     public List<Pessoa> findAll() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("admin-jpa");
-        EntityManager em = emf.createEntityManager();
-
+        em = emf.createEntityManager();
         try {
             System.out.println("Buscando todas as pessoas");
             List<Pessoa> pessoas = em.createQuery("FROM " + Pessoa.class.getName()).getResultList();
@@ -102,3 +94,4 @@ public class PessoaModel {
         return null;
     }
 }
+

@@ -8,10 +8,10 @@ import javax.persistence.Persistence;
 import java.util.List;
 
 public class ProdutoModel {
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("admin-jpa");
+    EntityManager em;
     public void create(Produto produto) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("admin-jpa");
-        EntityManager em = emf.createEntityManager();
-
+        em = emf.createEntityManager();
         try {
             System.out.println("criando um produto");
             em.getTransaction().begin();
@@ -28,9 +28,7 @@ public class ProdutoModel {
     }
 
     public void update(Produto produto) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("admin-jpa");
-        EntityManager em = emf.createEntityManager();
-
+        em = emf.createEntityManager();
         try {
             System.out.println("atualizando um produto");
             Produto p = em.find(Produto.class, produto.getId());
@@ -48,9 +46,7 @@ public class ProdutoModel {
     }
 
     public void delete(Produto produto) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("admin-jpa");
-        EntityManager em = emf.createEntityManager();
-
+        em = emf.createEntityManager();
         try {
             System.out.println("deletando um produto");
             Produto p = em.find(Produto.class, produto.getId());
@@ -68,9 +64,7 @@ public class ProdutoModel {
     }
 
     public void findById(Produto produto) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("admin-jpa");
-        EntityManager em = emf.createEntityManager();
-
+        em = emf.createEntityManager();
         try {
             System.out.println("Buscando um produto por id");
             Produto p1 = em.find(Produto.class, produto.getId());
@@ -85,9 +79,7 @@ public class ProdutoModel {
     }
 
     public List<Produto> findAll() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("admin-jpa");
-        EntityManager em = emf.createEntityManager();
-
+        em = emf.createEntityManager();
         try {
             System.out.println("Buscando todos os produtos");
             List<Produto> produtos = em.createQuery("FROM " + Produto.class.getName()).getResultList();
@@ -101,3 +93,4 @@ public class ProdutoModel {
         return null;
     }
 }
+
